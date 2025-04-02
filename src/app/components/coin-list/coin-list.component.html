@@ -1,1 +1,75 @@
-<p>coin-list works!</p>
+<div class="coin-list">
+    <h1 class="mb-4">All Cryptocurrencies</h1>
+    
+    <!-- Search Bar -->
+    <div class="input-group mb-4">
+      <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Search coins..." 
+        [(ngModel)]="searchTerm"
+        (input)="searchCoins()"
+      >
+      <button 
+        class="btn btn-outline-secondary" 
+        type="button"
+        *ngIf="searchTerm"
+        (click)="searchTerm = ''; searchCoins()"
+      >
+        Clear
+      </button>
+    </div>
+    
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="text-center p-5">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{errorMessage}}
+    </div>
+    
+    <!-- Coin Table -->
+    <div *ngIf="!isLoading && !errorMessage" class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Coin</th>
+                <th>Price</th>
+                <th>24h Change</th>
+                <th>24h Volume</th>
+                <th>Market Cap</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let coin of filteredCoins" [routerLink]="['/coin', coin.id]" style="cursor: pointer;">
+                <td>{{coin.market_cap_rank}}</td>
+                <td>
+                  <img [src]="coin.image" [alt]="coin.name" height="25" class="me-2">
+                  <span>{{coin.name}}</span>
+                  <span class="text-muted ms-2">{{coin.symbol | uppercase}}</span>
+                </td>
+                <td>${{coin.current_price | number:'1.2-6'}}</td>
+                <td [ngClass]="getPercentageClass(coin.price_change_percentage_24h)">
+                  {{coin.price_change_percentage_24h | number:'1.2-2'}}%
+                </td>
+                <td>${{coin.total_volume | number}}</td>
+                <td>${{coin.market_cap | number}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- No Results -->
+        <div *ngIf="filteredCoins.length === 0 && !isLoading" class="text-center p-4">
+          <p>No coins found matching "{{searchTerm}}"</p>
+        </div>
+      </div>
+    </div>
+  </div>
