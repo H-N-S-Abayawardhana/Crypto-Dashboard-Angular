@@ -1,7 +1,7 @@
 <div class="coin-list">
     <h1 class="mb-4">All Cryptocurrencies</h1>
     
-    <!-- Search Bar -->
+    <!-- Search Bar component -->
     <div class="input-group mb-4">
       <input 
         type="text" 
@@ -20,19 +20,19 @@
       </button>
     </div>
     
-    <!-- Loading Spinner -->
+    <!-- Loading spinner -->
     <div *ngIf="isLoading" class="text-center p-5">
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
     
-    <!-- Error Message -->
+    <!-- Error message -->
     <div *ngIf="errorMessage" class="alert alert-danger">
       {{errorMessage}}
     </div>
     
-    <!-- Coin Table -->
+    <!-- Coin List Table -->
     <div *ngIf="!isLoading && !errorMessage" class="card">
       <div class="card-body">
         <div class="table-responsive">
