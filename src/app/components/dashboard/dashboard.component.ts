@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   loadDashboardData(): void {
     this.isLoading = true;
     
-    // Get top coins
+    
     this.cryptoService.getTopCoins(10).subscribe({
       next: (data) => {
         this.topCoins = data;
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
       }
     });
     
-    // Get global market data
+    
     this.cryptoService.getGlobalMarketData().subscribe({
       next: (data) => {
         this.marketData = data.data;
