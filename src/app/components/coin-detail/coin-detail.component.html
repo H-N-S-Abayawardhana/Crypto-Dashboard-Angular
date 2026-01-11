@@ -74,7 +74,13 @@
               </div>
               <div class="d-flex justify-content-between mb-2">
                 <span>Fully Diluted Valuation</span>
-                <span>${{coin.market_data.fully_diluted_valuation?.usd | number || 'N/A'}}</span>
+                <span>
+                  {{
+                    coin.market_data.fully_diluted_valuation?.usd != null
+                      ? ('$' + (coin.market_data.fully_diluted_valuation?.usd | number))
+                      : 'N/A'
+                  }}
+                </span>
               </div>
               <div class="d-flex justify-content-between mb-2">
                 <span>Circulating Supply</span>
@@ -82,11 +88,25 @@
               </div>
               <div class="d-flex justify-content-between mb-2">
                 <span>Total Supply</span>
-                <span>{{coin.market_data.total_supply | number || 'N/A'}} {{coin.symbol | uppercase}}</span>
+                <span>
+                  {{
+                    coin.market_data.total_supply != null
+                      ? (coin.market_data.total_supply | number)
+                      : 'N/A'
+                  }}
+                  {{ coin.symbol | uppercase }}
+                </span>
               </div>
               <div class="d-flex justify-content-between">
                 <span>Max Supply</span>
-                <span>{{coin.market_data.max_supply | number || 'N/A'}} {{coin.symbol | uppercase}}</span>
+                <span>
+                  {{
+                    coin.market_data.max_supply != null
+                      ? (coin.market_data.max_supply | number)
+                      : 'N/A'
+                  }}
+                  {{ coin.symbol | uppercase }}
+                </span>
               </div>
             </div>
           </div>

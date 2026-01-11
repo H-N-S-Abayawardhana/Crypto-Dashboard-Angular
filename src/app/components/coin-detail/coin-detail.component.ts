@@ -1,5 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CryptoService } from '../../services/crypto.service';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 import { Subscription } from 'rxjs';
@@ -21,9 +23,10 @@ Chart.register(...registerables);
 
 @Component({
   selector: 'app-coin-detail',
+  standalone: true,
+  imports: [CommonModule, RouterLink],
   templateUrl: './coin-detail.component.html',
   styleUrls: ['./coin-detail.component.scss'],
-  standalone: false
 })
 export class CoinDetailComponent implements OnInit, OnDestroy {
   coinId: string = '';
