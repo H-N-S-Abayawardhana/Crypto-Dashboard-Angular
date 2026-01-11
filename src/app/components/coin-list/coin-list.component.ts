@@ -1,11 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { CryptoService } from '../../services/crypto.service';
 
 @Component({
   selector: 'app-coin-list',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './coin-list.component.html',
   styleUrls: ['./coin-list.component.scss'],
-  standalone: false
 })
 export class CoinListComponent implements OnInit {
   coins: any[] = [];
